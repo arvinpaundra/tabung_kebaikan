@@ -3,22 +3,29 @@ import { useRouter } from 'next/router';
 import MainContainer from '../../../components/atoms/MainContainer';
 import Container from '../../../components/atoms/Container';
 import Sidebar from '../../../components/organisms/Sidebar';
+import jwtDecode from 'jwt-decode';
+import CardPenarikan from '../../../components/organisms/CardPenarikan';
 
-const KodePenarikan = (props) => {
+const KodePenarikan = ({ user }) => {
   const router = useRouter();
 
   const { kode } = router.query;
 
+  const title = `Kode Penarikan ${kode}`;
+
   return (
     <>
       <Head>
-        <title>Kode Penarikan</title>
+        <title>{title}</title>
       </Head>
 
       <MainContainer>
-        <Sidebar active="Penarikan" />
+        <Sidebar active="Penarikan" user={user} />
         <Container>
-          <p>Penarikan/{kode}</p>
+          <h1 className="text-black/90 font-bold text-3xl">Penarikan Tabung Kode: {kode}</h1>
+
+          {/* Card detail */}
+          <CardPenarikan kode={kode} user={user} />
         </Container>
       </MainContainer>
     </>
@@ -26,3 +33,35 @@ const KodePenarikan = (props) => {
 };
 
 export default KodePenarikan;
+
+export async function getServerSideProps({ req }) {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  const jwtToken = Buffer.from(token, 'base64').toString('ascii');
+  const payload = jwtDecode(jwtToken);
+  const { user } = payload;
+
+  if (user.role !== '0') {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+}
