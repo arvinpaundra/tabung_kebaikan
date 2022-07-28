@@ -38,6 +38,28 @@ export default Login;
 export async function getServerSideProps({ req }) {
   const { token } = req.cookies;
 
+  if (token) {
+    const jwtToken = Buffer.from(token, 'base64').toString('ascii');
+    const payload = jwtDecode(jwtToken);
+    const { user } = payload;
+
+    if (user.role === '0') {
+      return {
+        redirect: {
+          destination: '/admin',
+          permanent: false,
+        },
+      };
+    } else if (user.role === '1') {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    }
+  }
+
   return {
     props: {},
   };
