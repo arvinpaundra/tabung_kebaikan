@@ -65,12 +65,13 @@ const PenarikanKecamatan = ({ user }) => {
           <section className="p-4 w-full bg-white rounded-xl drop-shadow-lg">
             {/* Table Rekap Kecamatan */}
             <TableRekapKecamatan
-              idKec={idKec.id_kec}
+              kec={idKec}
               limit={limit}
               page={page}
               search={search}
               month={month}
               year={year}
+              setLimit={setLimit}
               setPage={setPage}
             />
           </section>
