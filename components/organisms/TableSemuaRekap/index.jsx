@@ -47,6 +47,7 @@ const TableSemuaRekap = (props) => {
             <td className="py-4">Kode Tabung</td>
             <td className="py-4">Kecamatan</td>
             <td className="py-4">Status</td>
+            <td className="py-4">Kondisi Tabung</td>
             <td className="py-4">Nominal</td>
             <td className="py-4">Tgl. Tarik</td>
           </tr>
@@ -62,6 +63,7 @@ const TableSemuaRekap = (props) => {
             rekap.map((data) => (
               <TableItem
                 key={data.id_rekap}
+                kondisi={data.kondisi_tabung}
                 munfiq={data.munfiq}
                 nama_kec={data.nama_kec}
                 status={data.status}

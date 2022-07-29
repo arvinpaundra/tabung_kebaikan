@@ -47,6 +47,7 @@ const TableRekapStatus = (props) => {
             <td className="py-4">Kode Tabung</td>
             <td className="py-4">Kecamatan</td>
             <td className="py-4">Status</td>
+            <td className="py-4">Kondisi Tabung</td>
             <td className="py-4">Nominal</td>
             <td className="py-4">Tgl. Tarik</td>
           </tr>
@@ -63,6 +64,7 @@ const TableRekapStatus = (props) => {
               <TableItem
                 key={data.id_rekap}
                 munfiq={data.munfiq}
+                kondisi={data.kondisi_tabung}
                 nama_kec={data.nama_kec}
                 status={data.status}
                 nominal={data.nominal}

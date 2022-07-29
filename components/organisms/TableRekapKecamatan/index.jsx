@@ -122,22 +122,32 @@ const TableRekapKecamatan = (props) => {
             <th className="py-4">Munfiq</th>
             <th className="py-4">Kode Tabung</th>
             <th className="py-4">Status</th>
+            <th className="py-4">Kondisi Tabung</th>
             <th className="py-4">Nominal</th>
             <th className="py-4">Tgl. Tarik</th>
           </tr>
         </thead>
         <tbody className="text-center">
-          {rekap.map((data) => (
-            <TableItem
-              key={data.id_rekap}
-              munfiq={data.munfiq}
-              status={data.status}
-              nominal={data.nominal}
-              tgl_tarik={data.tgl_tarik}
-              kode={data.kode_tabung}
-              id={data.id_rekap}
-            />
-          ))}
+          {isLoading ? (
+            <tr>
+              <td colSpan={8} className="pt-8 pb-2 animate-pulse text-black/90 tracking-wide">
+                Loading . . .
+              </td>
+            </tr>
+          ) : (
+            rekap.map((data) => (
+              <TableItem
+                key={data.id_rekap}
+                munfiq={data.munfiq}
+                kondisi={data.kondisi_tabung}
+                status={data.status}
+                nominal={data.nominal}
+                tgl_tarik={data.tgl_tarik}
+                kode={data.kode_tabung}
+                id={data.id_rekap}
+              />
+            ))
+          )}
         </tbody>
       </table>
       <Pagination rows={rows} pages={pages} pageChange={pageChange} />

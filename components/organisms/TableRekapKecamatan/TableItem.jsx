@@ -2,7 +2,7 @@ import NumberFormat from 'react-number-format';
 import Badge from '../../atoms/badge';
 
 const TableItem = (props) => {
-  const { munfiq, status, nominal, tgl_tarik, kode } = props;
+  const { munfiq, status, nominal, tgl_tarik, kode, kondisi } = props;
 
   const formattedDate = tgl_tarik ? new Date(tgl_tarik) : null;
 
@@ -17,6 +17,7 @@ const TableItem = (props) => {
           <Badge status="bg-anger" label="belum" />
         )}
       </td>
+      <td className="py-6">{kondisi === 'b' ? 'Baik' : kondisi === 'r' ? 'Rusak' : '-'}</td>
       <td className="py-6">
         <NumberFormat
           displayType="text"

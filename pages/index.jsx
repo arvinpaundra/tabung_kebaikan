@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import jwtDecode from 'jwt-decode';
 
 export default function Home() {
   useEffect(() => {
@@ -36,4 +37,27 @@ export default function Home() {
       <footer></footer>
     </div>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  const jwtToken = Buffer.from(token, 'base64').toString('ascii');
+  const payload = jwtDecode(jwtToken);
+  const { user } = payload;
+
+  return {
+    props: {
+      user,
+    },
+  };
 }
