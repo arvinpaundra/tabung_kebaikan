@@ -12,6 +12,8 @@
     "@headlessui/react": "^1.6.6",
     "axios": "^0.27.2",
     "js-cookie": "^3.0.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
     "jwt-decode": "^3.1.2",
     "next": "12.2.3",
     "qrcode.react": "^3.1.0",
