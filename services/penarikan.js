@@ -37,3 +37,9 @@ export const setEditPenarikan = async (data, id_penarikan, kode_tabung) => {
 
   return callAPI({ url, method: 'PUT', data, token: true });
 };
+
+export const getNotifPenarikan = async (data) => {
+  const url = `${ROOT_URL}/notifications/notif-penarikan`;
+
+  return callAPI({ url, method: 'POST', data });
+};
