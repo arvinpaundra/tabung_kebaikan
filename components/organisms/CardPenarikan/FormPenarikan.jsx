@@ -1,15 +1,25 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { toast } from 'react-toastify';
-import { setAddPenarikan } from '../../../services/penarikan';
+import { getNotifPenarikan, setAddPenarikan } from '../../../services/penarikan';
 import { InputTarik } from './index';
 
 const FormPenarikan = (props) => {
-  const { id_kec, id_munfiq, kode, user } = props;
+  const { id_kec, id_munfiq, kode, user, munfiq, no_tlp } = props;
 
   const [nominal, setNominal] = useState(0);
   const [kondisi, setKondisi] = useState('');
+
+  const getNotif = useCallback(async (data) => {
+    try {
+      const notif = await getNotifPenarikan(data);
+
+      if (notif.error) {
+        throw new Error(notif.message);
+      }
+    } catch (error) {}
+  }, []);
 
   const router = useRouter();
 
@@ -22,14 +32,17 @@ const FormPenarikan = (props) => {
       nominal: +nominal,
       id_user: user.id_user,
       kondisi_tabung: kondisi,
+      munfiq: munfiq,
+      no_tlp: no_tlp,
     };
 
-    if (+nominal <= 0 || !nominal) {
+    if (+nominal <= 0 || !nominal || !parseInt(nominal)) {
       toast.error('Masukkan nominal penarikan!');
       return;
     }
 
     const response = await setAddPenarikan(data, kode);
+    await getNotif(data);
 
     if (response.error) {
       if (response.message === 'conflict') {
@@ -59,6 +72,7 @@ const FormPenarikan = (props) => {
         onChange={(event) => setKondisi(event.target.value)}
         className="bg-light-grey px-4 py-2 text-black/90/80 rounded-full w-80 border-light-grey border hover:border-gsc focus:outline-none focus:border focus:border-gsc placeholder:text-black/90/80"
       >
+        <option>Kondisi tabung</option>
         <option value="b">Baik</option>
         <option value="r">Rusak</option>
       </select>

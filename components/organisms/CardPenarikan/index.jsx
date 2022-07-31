@@ -143,6 +143,8 @@ const CardPenarikan = (props) => {
               id_munfiq={munfiq.id_munfiq}
               user={user}
               kode={kode}
+              munfiq={munfiq.fullname}
+              no_tlp={munfiq.no_tlp}
             />
           </>
         )}
