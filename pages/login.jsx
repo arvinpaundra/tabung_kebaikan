@@ -53,7 +53,7 @@ export async function getServerSideProps({ req }) {
     } else if (user.role === '1') {
       return {
         redirect: {
-          destination: '/',
+          destination: '/petugas',
           permanent: false,
         },
       };

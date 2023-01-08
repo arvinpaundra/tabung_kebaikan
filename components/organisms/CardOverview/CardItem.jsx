@@ -2,7 +2,7 @@ import Image from 'next/image';
 import NumberFormat from 'react-number-format';
 
 const CardItem = (props) => {
-  const { desc1, desc2, desc3, value1, value2 } = props;
+  const { desc1, desc2, desc3, value1, value2, type } = props;
 
   return (
     <div className="card bg-white drop-shadow-lg p-6 rounded-2xl">
@@ -16,7 +16,7 @@ const CardItem = (props) => {
         </div>
         <div className="flex-col pt-4">
           <p className="text-sm">{desc3}</p>
-          {!value2 ? (
+          {!value2 && type === 'nominal' ? (
             <p className="font-medium text-xl text-black/90">
               <NumberFormat
                 thousandSeparator="."

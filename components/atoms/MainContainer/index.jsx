@@ -3,3 +3,7 @@ const MainContainer = (props) => {
 };
 
 export default MainContainer;
+
+export const MobileContainer = (props) => {
+  return <main className="max-w-md bg-soft-blue w-full min-h-screen pb-14">{props.children}</main>;
+};

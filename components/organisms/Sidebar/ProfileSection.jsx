@@ -50,9 +50,7 @@ const ProfileSection = ({ user }) => {
           <img
             src={`${IMG_URL}/profiles/${profile.profile_picture}`}
             alt="Profile"
-            width={90}
-            height={90}
-            className="rounded-full mb-1"
+            className="rounded-full mb-1 object-cover h-full w-full"
           />
           <h3 className="mt-2 font-bold text-lg text-black/90">{profile.fullname}</h3>
           <p>{profile.username}</p>

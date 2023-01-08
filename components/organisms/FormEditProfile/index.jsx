@@ -78,7 +78,7 @@ const FormEditProfile = (props) => {
             width={96}
             height={96}
             alt="Profile picture"
-            className="rounded-full"
+            className="rounded-full object-cover h-full w-full"
           />
         ) : (
           <img
@@ -86,7 +86,7 @@ const FormEditProfile = (props) => {
             width={96}
             height={96}
             alt="Profile picture"
-            className="rounded-full"
+            className="rounded-full object-cover h-full w-full"
           />
         )}
         <div className="absolute top-0 w-full h-full left-0 rounded-full z-10 opacity-0 flex items-center justify-center hover:opacity-100 hover:bg-gsc/80 transition ease-in-out duration-200">
@@ -95,6 +95,7 @@ const FormEditProfile = (props) => {
       </label>
       <input
         type="file"
+        accept="image/*"
         className="hidden"
         id="file"
         onChange={(event) => {
